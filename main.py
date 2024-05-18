@@ -29,7 +29,24 @@ def main(argv):
     # Print out temperature
     main = response["main"]
     temperature = main["temp"]
-    print("The current temperature in " + city_name + " is " + str(temperature) + " celsius")
+    print("Temperature: " + str(temperature) + " celsius")
+
+    # Prints out humidity
+    humidity = main["humidity"]
+    print("Humidity: " + str(humidity) + "%")
+
+    # Print out description
+    weather = response["weather"]
+    weather_dict = weather[0]
+    description = weather_dict["description"]
+
+    print("Description: " + str(description))
+
+    # Print out wind speed
+    wind = response["wind"]
+    wind_speed = wind["speed"]
+
+    print("Wind Speed: " + str(wind_speed) + " m/s")
 
 if __name__ == "__main__":
     main(sys.argv)
