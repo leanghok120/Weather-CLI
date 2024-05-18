@@ -7,15 +7,15 @@ import json
 load_dotenv()
 
 def main(argv):
-    city_name = argv[1]
+    CITY_NAME = argv[1]
 
     # Get weather info from open weather api
-    api_key = os.getenv("OPEN_WEATHER_API")
-    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    API_KEY = os.getenv("OPEN_WEATHER_API")
+    BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
     metric_unit = "metric"
-    complete_url = base_url + "appid=" + api_key + "&q=" + city_name + "&units=" + metric_unit
+    COMPLETE_URL = BASE_URL + "appid=" + API_KEY + "&q=" + CITY_NAME + "&units=" + metric_unit
 
-    response = requests.get(complete_url)
+    response = requests.get(COMPLETE_URL)
     response = response.json()
 
     # Check city and API Key
