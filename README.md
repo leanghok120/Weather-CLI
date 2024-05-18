@@ -33,7 +33,9 @@ A command-line interface (CLI) application built in Python that fetches weather 
     ```python
     API_KEY = 'your_api_key_here'
     ```
-2. Run the script:
+2. Remove `from dotenv import load_dotenv, dotenv_values` 
+3. Remove `import os`
+4. Run the script:
     ```bash
     python main.py {city_name}
     ```
