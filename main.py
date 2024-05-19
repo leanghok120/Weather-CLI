@@ -1,5 +1,6 @@
 import sys
 import requests
+import argparse
 from dotenv import load_dotenv, dotenv_values 
 import os
 import json
@@ -7,13 +8,15 @@ import json
 load_dotenv()
 
 def main(argv):
-    CITY_NAME = argv[1]
+    parser = argparse.ArgumentParser(description="Check the weather of a city or country")
+    parser.add_argument("country", help="The city or country to check the weather for")
+    args = parser.parse_args()
 
     # Get weather info from open weather api
     API_KEY = os.getenv("OPEN_WEATHER_API")
     BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
     metric_unit = "metric"
-    COMPLETE_URL = BASE_URL + "appid=" + API_KEY + "&q=" + CITY_NAME + "&units=" + metric_unit
+    COMPLETE_URL = BASE_URL + "appid=" + API_KEY + "&q=" + args.country + "&units=" + metric_unit
 
     response = requests.get(COMPLETE_URL)
     response = response.json()
