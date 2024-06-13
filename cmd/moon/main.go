@@ -64,5 +64,5 @@ func main() {
 	fmt.Printf("Temperature: %f\n", weather.Main.Temp)
 	fmt.Printf("Humidity: %d\n", weather.Main.Humidity)
 	fmt.Printf("Description: %s\n", weather.Weather[0].Description)
-	fmt.Printf("Wind Speed: %f\n", weather.Wind.Speed)
+	fmt.Printf("Wind Speed: %.2f\n", weather.Wind.Speed)
 }
