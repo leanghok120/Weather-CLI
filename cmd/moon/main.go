@@ -17,8 +17,12 @@ type Weather struct {
 		Description string `json:"description"`
 	} `json:"weather"`
 	Main struct {
-		Temp float32 `json:"temp"`
+		Temp     float32 `json:"temp"`
+		Humidity int     `json:"humidity"`
 	} `json:"main"`
+	Wind struct {
+		Speed float32 `json:"speed"`
+	} `json:"wind"`
 }
 
 func main() {
@@ -56,5 +60,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(weather.Main.Temp)
+
+	fmt.Printf("Temperature: %f\n", weather.Main.Temp)
+	fmt.Printf("Humidity: %d\n", weather.Main.Humidity)
+	fmt.Printf("Description: %s\n", weather.Weather[0].Description)
+	fmt.Printf("Wind Speed: %f\n", weather.Wind.Speed)
 }
