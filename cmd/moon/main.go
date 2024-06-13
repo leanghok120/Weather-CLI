@@ -26,6 +26,11 @@ type Weather struct {
 }
 
 func main() {
+	location := "london"
+	if len(os.Args) >= 2 {
+		location = os.Args[1]
+	}
+
 	// Loads api key from .env
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -36,7 +41,7 @@ func main() {
 	api_key := os.Getenv("API_KEY")
 	const BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
 	metric_unit := "metric"
-	COMPLETE_URL := BASE_URL + "appid=" + api_key + "&q=Phnom%20Penh" + "&units=" + metric_unit
+	COMPLETE_URL := BASE_URL + "appid=" + api_key + "&q=" + location + "&units=" + metric_unit
 
 	// Get weather info
 	res, err := http.Get(COMPLETE_URL)
