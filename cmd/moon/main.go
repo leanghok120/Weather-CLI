@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -9,6 +10,16 @@ import (
 
 	"github.com/joho/godotenv"
 )
+
+type Weather struct {
+	Weather []struct {
+		Main        string `json:"main"`
+		Description string `json:"description"`
+	} `json:"weather"`
+	Main struct {
+		Temp float32 `json:"temp"`
+	} `json:"main"`
+}
 
 func main() {
 	// Loads api key from .env
@@ -38,5 +49,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(body))
+
+	// Parse body into weather struct
+	var weather Weather
+	err = json.Unmarshal(body, &weather)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(weather.Main.Temp)
 }
