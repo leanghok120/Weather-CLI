@@ -1,6 +1,6 @@
-# Weather-CLI
+# moon
 
-A command-line interface (CLI) application built in Python that fetches weather information using the OpenWeather API.
+A **simple** CLI built in Go that fetches weather information using the OpenWeather API.
 
 ## Features
 
@@ -9,41 +9,58 @@ A command-line interface (CLI) application built in Python that fetches weather 
 
 ## Prerequisites
 
-- Python 3.x
 - An API key from [OpenWeather](https://openweathermap.org/api)
 
 ## Installation
 
 1. Clone the repository:
     ```bash
-    git clone git@github.com:leanghok120/Weather-CLI.git
+    git clone git@github.com:leanghok120/moon.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd Weather-CLI
+    cd moon/cmd/moon
     ```
-3. Install required dependencies:
+3. Edit the main.go and add your OpenWeather api key:
+    ```go
+    api_key = "your_api_key_here"
+    ```
+
+4. Remove this part of the main.go:
+    ```go
+    // Loads api key from .env
+    err := godotenv.Load(".env")
+    if err != nil {
+        log.Fatalf("Error loading .env file: %s", err)
+    }
+    ```
+
+5. Install moon
     ```bash
-    pip install requests
+    go install .
     ```
 
 ## Usage
 
-1. Open `main.py` and add your OpenWeather API key:
-    ```python
-    API_KEY = 'your_api_key_here'
-    ```
-2. Remove `from dotenv import load_dotenv, dotenv_values` 
-3. Remove `import os`
-4. Run the script:
-    ```bash
-    python main.py {city_name}
-    ```
+Fetches weather info about city
+
+```bash
+moon london
+```
+
+Fetches weather info about country
+
+```bash
+moon netherlands
+```
+
+
 
 ## Example
 
 ```bash
-$ python main.py London
+moon london
+Location: London
 Temperature: 15 celsius
 Humidity: 82%
 Description: light rain
