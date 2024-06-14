@@ -59,7 +59,7 @@ moon netherlands
 ## Example
 
 ```bash
-moon london
+$ moon london
 Location: London
 Temperature: 15 celsius
 Humidity: 82%
