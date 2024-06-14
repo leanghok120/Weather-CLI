@@ -1,36 +1,16 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/leanghok120/moon/internal/weather"
 )
 
-type Weather struct {
-	Weather []struct {
-		Main        string `json:"main"`
-		Description string `json:"description"`
-	} `json:"weather"`
-	Main struct {
-		Temp     float32 `json:"temp"`
-		Humidity int     `json:"humidity"`
-	} `json:"main"`
-	Wind struct {
-		Speed float32 `json:"speed"`
-	} `json:"wind"`
-	Name string `json:"name"`
-}
-
 func main() {
-	location := "london"
-	if len(os.Args) >= 2 {
-		location = os.Args[1]
-	}
+	location := weather.GetLocation()
 
 	// Loads api key from .env
 	err := godotenv.Load(".env")
@@ -42,30 +22,9 @@ func main() {
 	api_key := os.Getenv("API_KEY")
 	const BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
 	metric_unit := "metric"
-	COMPLETE_URL := BASE_URL + "appid=" + api_key + "&q=" + location + "&units=" + metric_unit
+	complete_url := BASE_URL + "appid=" + api_key + "&q=" + location + "&units=" + metric_unit
 
-	// Get weather info
-	res, err := http.Get(COMPLETE_URL)
-	if err != nil {
-		panic(err)
-	}
-	defer res.Body.Close()
-
-	if res.StatusCode != 200 {
-		panic("Weather api not available")
-	}
-
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		panic(err)
-	}
-
-	// Parse body into weather struct
-	var weather Weather
-	err = json.Unmarshal(body, &weather)
-	if err != nil {
-		panic(err)
-	}
+	weather := weather.GetWeather(complete_url)
 
 	fmt.Printf("Location: %s\n", weather.Name)
 	fmt.Printf("Temperature: %.0f°C\n", weather.Main.Temp)
