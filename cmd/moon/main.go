@@ -2,29 +2,14 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/leanghok120/moon/internal/weather"
 )
 
 func main() {
 	location := weather.GetLocation()
 
-	// Loads api key from .env
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file: %s", err)
-	}
-
-	// Weather api stuff
-	api_key := os.Getenv("API_KEY")
-	const BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
-	metric_unit := "metric"
-	complete_url := BASE_URL + "appid=" + api_key + "&q=" + location + "&units=" + metric_unit
-
-	weather := weather.GetWeather(complete_url)
+	weather := weather.GetWeather(location)
 
 	fmt.Printf("Location: %s\n", weather.Name)
 	fmt.Printf("Temperature: %.0f°C\n", weather.Main.Temp)

@@ -3,7 +3,11 @@ package weather
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"net/http"
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 type Weather struct {
@@ -21,7 +25,19 @@ type Weather struct {
 	Name string `json:"name"`
 }
 
-func GetWeather(complete_url string) Weather {
+func GetWeather(location string) Weather {
+	// Loads api key from .env
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s", err)
+	}
+
+	// Weather api stuff
+	api_key := os.Getenv("API_KEY")
+	const BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
+	metric_unit := "metric"
+	complete_url := BASE_URL + "appid=" + api_key + "&q=" + location + "&units=" + metric_unit
+
 	// Get weather info
 	res, err := http.Get(complete_url)
 	if err != nil {
