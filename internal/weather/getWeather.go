@@ -3,11 +3,7 @@ package weather
 import (
 	"encoding/json"
 	"io"
-	"log"
 	"net/http"
-	"os"
-
-	"github.com/joho/godotenv"
 )
 
 type Weather struct {
@@ -26,14 +22,8 @@ type Weather struct {
 }
 
 func GetWeather(location string) Weather {
-	// Loads api key from .env
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file: %s", err)
-	}
-
 	// Weather api stuff
-	api_key := os.Getenv("API_KEY")
+	api_key := "your Openweather api key"
 	const BASE_URL = "http://api.openweathermap.org/data/2.5/weather?"
 	metric_unit := "metric"
 	complete_url := BASE_URL + "appid=" + api_key + "&q=" + location + "&units=" + metric_unit
