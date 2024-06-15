@@ -23,21 +23,17 @@ A **simple** CLI built in Go that fetches weather information using the OpenWeat
     ```
 3. Edit the main.go and add your OpenWeather api key:
     ```go
-    api_key = "your_api_key_here"
-    ```
-
-4. Remove this part of the main.go:
-    ```go
-    // Loads api key from .env
-    err := godotenv.Load(".env")
-    if err != nil {
-        log.Fatalf("Error loading .env file: %s", err)
-    }
+    api_key = "your Openweather api key"
     ```
 
 5. Install moon
     ```bash
     go install .
+    ```
+
+6. Now you have moon installed
+    ```bash
+    moon antarctica
     ```
 
 ## Usage
@@ -53,8 +49,6 @@ Fetches weather info about country
 ```bash
 moon netherlands
 ```
-
-
 
 ## Example
 
