@@ -1,11 +1,36 @@
 package weather
 
 import (
+	"flag"
 	"fmt"
 )
 
-func DisplayShort() {
-	location := GetLocation()
+type Config struct {
+	Location    string
+	LongInfo    bool
+	ShowVersion bool
+}
+
+func ParseFlags() *Config {
+	var location string
+	var longInfo bool
+	var showVersion bool
+
+	flag.StringVar(&location, "c", "london", "Location")
+	flag.BoolVar(&longInfo, "L", false, "Show more information")
+	flag.BoolVar(&showVersion, "v", false, "Show version")
+
+	flag.Parse()
+
+	return &Config{
+		Location:    location,
+		LongInfo:    longInfo,
+		ShowVersion: showVersion,
+	}
+}
+
+func DisplayShort(flags Config) {
+	location := GetLocation(flags)
 	weather := GetWeather(location)
 
 	fmt.Printf("Location: %s\n", weather.Name)
@@ -15,8 +40,8 @@ func DisplayShort() {
 	fmt.Printf("Wind Speed: %.2f\n", weather.Wind.Speed)
 }
 
-func DisplayLong() {
-	location := GetLocation()
+func DisplayLong(flags Config) {
+	location := GetLocation(flags)
 	weather := GetWeather(location)
 
 	fmt.Printf("Location: %s\n", weather.Name)
