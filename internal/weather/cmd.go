@@ -51,3 +51,7 @@ func DisplayLong(flags Config) {
 	fmt.Printf("Description: %s\n", weather.Weather[0].Description)
 	fmt.Printf("Wind Speed: %.2f\n", weather.Wind.Speed)
 }
+
+func DisplayVersion(flags Config) {
+	fmt.Println("v1.0.0")
+}
