@@ -12,8 +12,9 @@ type Weather struct {
 		Description string `json:"description"`
 	} `json:"weather"`
 	Main struct {
-		Temp     float32 `json:"temp"`
-		Humidity int     `json:"humidity"`
+		Temp       float32 `json:"temp"`
+		Humidity   int     `json:"humidity"`
+		Feels_like float32 `json:"feels_like"`
 	} `json:"main"`
 	Wind struct {
 		Speed float32 `json:"speed"`
