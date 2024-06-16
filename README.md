@@ -33,7 +33,7 @@ A **simple** CLI built in Go that fetches weather information using the OpenWeat
 
 6. Now you have moon installed
     ```bash
-    moon antarctica
+    moon -c antarctica
     ```
 
 ## Usage
@@ -41,19 +41,27 @@ A **simple** CLI built in Go that fetches weather information using the OpenWeat
 Fetches weather info about city
 
 ```bash
-moon london
+moon -c london
 ```
 
 Fetches weather info about country
 
 ```bash
-moon netherlands
+moon -c netherlands
+```
+
+### More information
+
+If you want to fetch more weather information, you can use the -L flag
+
+```bash
+moon -L -c netherlands
 ```
 
 ## Example
 
 ```bash
-$ moon london
+$ moon -c london
 Location: London
 Temperature: 15 celsius
 Humidity: 82%
